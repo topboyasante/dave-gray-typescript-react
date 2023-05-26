@@ -63,3 +63,76 @@ class WebDeveloper extends AnotherUser{
 }
 
 const Sara = new WebDeveloper ("Macbook Pro","Sara","Web Devloper",20,20)
+
+
+//Applying Interfaces to a class:
+
+interface Musician{
+    name:string,
+    instrument:string,
+    play(action:string):string
+}
+
+class Guitarist implements Musician{
+    name: string
+    instrument: string
+
+    constructor(name:string,instrument:string){
+        this.name=name
+        this.instrument = instrument
+    }
+
+    play(action:string):string{
+        return `${this.name} ${action} the ${this.instrument}`
+    }
+}
+
+const Asante = new Guitarist("Asante","Bass Guitar")
+console.log(Asante.play("strums"))
+
+//Static Properties
+
+class Peeps{
+    static count: number = 0
+
+    static getCount():number{
+        return Peeps.count
+    }
+
+    public id: number
+
+    constructor(public name:string){
+        this.name = name
+        this.id = ++Peeps.count
+    }
+}
+
+const Bill = new Peeps("Bill")
+
+
+//Getters and Setters
+class Bands{
+    private dataState:string[]
+    constructor(){
+        this.dataState = []
+    }
+
+    public get data(): string[]{
+        return this.data
+    }
+
+    public set data(value:string[]){
+        if(Array.isArray(value) && value.every(element => typeof element === "string")){
+            //Setters cannot return a value
+            this.dataState = value
+            return
+        }
+        else{
+            throw new Error("Param is not a string array")
+        }
+    }
+}
+
+const myBand = new Bands()
+myBand.data = ["Blacko Sheriff","Tion Wayne","Aitch"]
+
